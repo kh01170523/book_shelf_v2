@@ -14,14 +14,18 @@ class BooksController < ApplicationController
   
   def create
     @book = Book.new(book_params)
+    if @book.valid?
     @book.save
-    
     # リダイレクト
     redirect_to books_path
+  else
+    flash[:alert]= @book.errors.full_messages
+    render:new
   end
   
   def edit
     #@book = Book.find(params[:id])
+  end
   end
   
   def update
